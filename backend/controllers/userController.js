@@ -1,5 +1,6 @@
 import User from "../models/User.js"
 import generateId from "../helpers/generateId.js";
+import generateJWT from "../helpers/generateJWT.js";
 
 const register = async (req, res) => {
 
@@ -55,7 +56,37 @@ const confirm = async (req, res) => {
 
 }
 
+const login = async (req, res) => {
+    const { email, password } = req.body
+    // Check if the user exists
+    const user = await User.findOne({ email })
+    if (!user) {
+        const error = new Error("User didn't found")
+        return res.status(404).json({ msg: error.message })
+    }
+    // Check if the user is confirmed
+    if (!user.confirmed) {
+        const error = new Error("Your account is not confirmed")
+        return res.status(403).json({ msg: error.message })
+    }
+
+    // check passwd
+    if (await user.checkPassword(password)) {
+        res.json({
+            _id: user._id,
+            nombre: user.name,
+            email: user.email,
+            token: generateJWT(user._id)
+        })
+    } else {
+        const error = new Error("Password incorrect")
+        return res.status(403).json({ msg: error.message })
+    }
+
+}
+
 export {
     register,
-    confirm
+    confirm,
+    login
 }
