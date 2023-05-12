@@ -15,7 +15,7 @@ connectDB()
 
 // ---- Routing ----
 
-// Usuarios
+// Users
 app.use('/api/users', userRoutes)
 
 
