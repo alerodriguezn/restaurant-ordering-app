@@ -1,16 +1,17 @@
 import express from "express";
 import { addProduct,updateProduct,deleteProduct } from "../controllers/productController.js";
+import checkAuth from "../middleware/checkAuth.js";
 
 
 const router = express.Router()
 
-router.post("/add", addProduct)
+router.post("/add", checkAuth , addProduct)
 
 
 router
     .route("/:code")
-    .put(updateProduct)
-    .delete(deleteProduct)
+    .put(checkAuth, updateProduct)
+    .delete(checkAuth, deleteProduct)
 
 
 
