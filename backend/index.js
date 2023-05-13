@@ -2,6 +2,8 @@ import express from "express"
 import connectDB from "./config/db.js"
 import dotenv from "dotenv"
 import userRoutes from "./routes/userRoutes.js" 
+import productRoutes from "./routes/productRoutes.js"
+import orderRoutes from "./routes/orderRoutes.js"
 
 const app = express()
 
@@ -17,6 +19,10 @@ connectDB()
 
 // Users
 app.use('/api/users', userRoutes)
+
+app.use('/api/products', productRoutes) 
+
+app.use('/api/orders', orderRoutes)
 
 
 
