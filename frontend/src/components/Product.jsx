@@ -1,10 +1,12 @@
 import React from "react";
-
 import { Image } from "@chakra-ui/react";
-import {Card, CardBody, CardFooter, Stack, Heading, Text, Divider, Button} from "@chakra-ui/react";
+import {Card, CardBody, CardFooter, Stack, Heading, Text, Divider, Button, useToast} from "@chakra-ui/react";
+
 
 const Product = () => {
-  
+
+  const toast = useToast()
+
   return (
     <Card maxW="sm">
       <CardBody>
@@ -24,7 +26,17 @@ const Product = () => {
         </Stack>
       </CardBody>
       <CardFooter>
-          <Button variant="solid" bg={"#FBBF24"}>
+          <Button variant="solid" bg={"#FBBF24"}
+          onClick={() =>
+            toast({
+              title: 'Product Added',
+              description: "The product has been added to your cart.",
+              status: 'success',
+              duration: 5000,
+              isClosable: true,
+            })
+          }
+          >
             Add to cart
           </Button>
       </CardFooter>

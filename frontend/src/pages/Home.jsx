@@ -1,10 +1,10 @@
 import { Menu, MenuButton, MenuList, MenuItem, Button, MenuDivider, MenuGroup } from "@chakra-ui/react";
+import ProductList from "../components/ProductList.jsx";
 import { TiThMenu } from "react-icons/ti";
 import { FaShoppingCart, FaHamburger, FaPizzaSlice, FaCoffee, FaUserAlt } from "react-icons/fa";
 import { GiTacos } from "react-icons/gi";
 import { BiSushi } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
-import ProductList from "../components/ProductList.jsx";
+
 
 
 
