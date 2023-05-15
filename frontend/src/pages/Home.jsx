@@ -1,7 +1,11 @@
-import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem, Button, MenuDivider, MenuGroup } from "@chakra-ui/react";
 import { TiThMenu } from "react-icons/ti";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaHamburger, FaPizzaSlice, FaCoffee, FaUserAlt } from "react-icons/fa";
+import { GiTacos } from "react-icons/gi";
+import { BiSushi } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 import ProductList from "../components/ProductList.jsx";
+
 
 
 const Home = () => {
@@ -12,19 +16,33 @@ const Home = () => {
           <Menu>
             <MenuButton
               bg="#FBBF24"
-              _hover={"#F6E05E"}
+              _hover={{ bg: "#F6E05E" }}
+              _expanded={{ bg: "#FBBF24" }}
+        
               as={Button}
+             
               rightIcon={<TiThMenu />}
             >
               Menu
             </MenuButton>
-            <MenuList fontWeight={"bold"}>
-              <MenuItem>Hamburguers</MenuItem>
-              <MenuItem>Pizzas</MenuItem>
-              <MenuItem>Tacos</MenuItem>
-              <MenuItem>Sushi</MenuItem>
-              <MenuItem>Coffee</MenuItem>
+            <MenuList fontWeight={""} bg={"#FBBF24"}>
+              <MenuGroup title='Food & Drinks' className="">
+                <MenuItem icon={<FaHamburger size={18}/>} _focus={{ bg: "#FFF" }} bg={"#FBBF24"}>Hamburguers</MenuItem>
+                <MenuItem icon={<FaPizzaSlice size={18}/>} _focus={{ bg: "#FFF" }} bg={"#FBBF24"}>Pizzas</MenuItem>
+                <MenuItem icon={<GiTacos size={18}/>} _focus={{ bg: "#FFF" }} bg={"#FBBF24"}>Tacos</MenuItem>
+                <MenuItem icon={<BiSushi size={18}/>} _focus={{ bg: "#FFF" }} bg={"#FBBF24"}>Sushi</MenuItem>
+                <MenuItem icon={<FaCoffee size={18}/>} _focus={{ bg: "#FFF" }} bg={"#FBBF24"}>Coffee</MenuItem>
+              </MenuGroup>
+              <MenuDivider borderColor={"#171923"} />
+              <MenuGroup title='Orders' color={"#171923"} fontWeight={"bold"} >
+                <MenuItem _focus={{ bg: "#FFF" }} bg={"#FBBF24"}>My Orders</MenuItem>
+              </MenuGroup>
+              <MenuDivider borderColor={"#171923"} />
+              <MenuGroup title='Profile' color={"#171923"} fontWeight={"bold"} >
+                <MenuItem icon={<FaUserAlt size={16} />} _focus={{ bg: "#FFF" }} bg={"#FBBF24"}>My Account</MenuItem>
+              </MenuGroup>
             </MenuList>
+
           </Menu>
 
           <h1 className="font-bold text-md md:text-xl">
@@ -32,7 +50,7 @@ const Home = () => {
           </h1>
 
           <button className=" bg-amber-400 rounded-md p-2 mr-8">
-            <FaShoppingCart className="" size={24} />
+            <FaShoppingCart size={24} />
           </button>
         </nav>
       </header>
