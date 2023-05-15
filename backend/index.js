@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import userRoutes from "./routes/userRoutes.js" 
 import productRoutes from "./routes/productRoutes.js"
 import orderRoutes from "./routes/orderRoutes.js"
+import cors from "cors"
 
 const app = express()
 
@@ -15,6 +16,13 @@ dotenv.config()
 
 connectDB()
 
+// ---- CORS ----
+
+const corsOptions = {
+  origin: 'http://localhost:5173'
+}
+app.use(cors(corsOptions))
+
 // ---- Routing ----
 
 // Users
@@ -23,8 +31,6 @@ app.use('/api/users', userRoutes)
 app.use('/api/products', productRoutes) 
 
 app.use('/api/orders', orderRoutes)
-
-
 
 // Port
 const PORT = process.env.PORT || 4000

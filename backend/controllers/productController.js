@@ -1,5 +1,14 @@
 import Product from "../models/Product.js";
 
+const getAllProducts = async (req, res) => {
+    try {
+        const products = await Product.find({});
+        res.json(products);
+    } catch (error) {
+        console.log(error);
+    }   
+}
+
 const addProduct = async (req, res) => {
     const { code } = req.body;
 
@@ -34,6 +43,7 @@ const updateProduct = async(req, res) => {
         product.name = req.body.name || product.name;
         product.description = req.body.description || product.description;
         product.price = req.body.price || product;
+        product.image = req.body.image || product.image;
     
         const updatedProduct = await product.save();
         res.json( updatedProduct );
@@ -65,5 +75,6 @@ const deleteProduct = async(req, res) => {
 export {
     addProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getAllProducts
 }
