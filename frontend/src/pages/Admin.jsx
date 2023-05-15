@@ -1,8 +1,8 @@
-import AdminNavbar from "../components/AdminNavbar"
+
 
 const Admin = () => {
   return (
-    <AdminNavbar/>
+    <div>Hello</div>
   )
 }
 

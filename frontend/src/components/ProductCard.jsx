@@ -3,7 +3,7 @@ import { Image } from "@chakra-ui/react";
 import {Card, CardBody, CardFooter, Stack, Heading, Text, Divider, Button, useToast} from "@chakra-ui/react";
 
 
-const Product = ({ product }) => {
+const ProductCard = ({ product }) => {
 
   const toast = useToast();
 
@@ -48,4 +48,4 @@ const Product = ({ product }) => {
   );
 };
 
-export default Product;
+export default ProductCard;
