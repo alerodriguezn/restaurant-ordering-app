@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home.jsx";
+import Admin from "./pages/Admin.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ProductsProvider } from "./context/ProductsProvider.jsx";
 
@@ -10,6 +11,7 @@ function App() {
         <ProductsProvider>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </ProductsProvider>
       </ChakraProvider>
