@@ -4,6 +4,7 @@ import { MdUpdate, MdDelete } from "react-icons/md";
 const ProductPreview = ({ product }) => {
 
   const { name, price, description } = product;
+  
 
   return (
     <Box>
