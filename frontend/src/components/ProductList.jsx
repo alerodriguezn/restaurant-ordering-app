@@ -1,7 +1,7 @@
 import React from "react";
 import { SimpleGrid } from "@chakra-ui/react";
 import ProductCard from "./ProductCard";
-import useProducts from "../../hooks/useProducts";
+import useProducts from "../hooks/useProducts";
 
 const ProductList = () => {
   const { products } = useProducts();

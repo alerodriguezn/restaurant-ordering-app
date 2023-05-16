@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Admin from "./pages/Admin.jsx";
-import ProtectedRoute from "../layouts/ProtectedRoute.jsx";
+import ProtectedRoute from "./layouts/ProtectedRoute.jsx";
 import Products from "./pages/Products.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ProductsProvider } from "./context/ProductsProvider.jsx";

@@ -1,5 +1,7 @@
 import { useState, useEffect, createContext } from "react";
-import clienteAxios from "../../config/axiosClient";
+import axiosClient from "../config/axiosClient";
+
+
 
 const ProductsContext = createContext();
 
@@ -10,7 +12,7 @@ const ProductsProvider = ({ children }) => {
     useEffect(() => {
         const getProducts = async () => {
           try {
-            const { data } = await clienteAxios("/products/getAll")
+            const { data } = await axiosClient("/products/getAll")
             setProducts(data)
  
     

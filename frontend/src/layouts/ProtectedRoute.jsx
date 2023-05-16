@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom"
-import AdminNavbar from "../src/components/AdminNavbar"
+import AdminNavbar from "../components/AdminNavbar"
 
 const ProtectedRoute = () => {
   return (
