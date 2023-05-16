@@ -11,10 +11,13 @@ import {
   FormControl,
   FormLabel,
   Input,
+  useToast
 } from "@chakra-ui/react";
 import useProducts from "../hooks/useProducts";
 
 const AddProductModal = ({ isOpen, onClose }) => {
+
+    const toast = useToast()
 
     const { addProduct } = useProducts();
 
@@ -38,6 +41,14 @@ const AddProductModal = ({ isOpen, onClose }) => {
     setPrice("");
     setImage("");
 
+    toast({
+        title: 'Product Added',
+        description: "The product was added successfully",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+    })
+
 
   }
 
@@ -46,7 +57,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Add a New Product</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl>
@@ -72,10 +83,10 @@ const AddProductModal = ({ isOpen, onClose }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button colorScheme="red" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="solid" onClick={handleSubmit}>Save</Button>
+            <Button variant="solid" colorScheme="purple" onClick={handleSubmit}>Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

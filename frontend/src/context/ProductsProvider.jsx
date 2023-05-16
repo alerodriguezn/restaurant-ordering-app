@@ -1,15 +1,15 @@
 import { useState, useEffect, createContext } from "react";
 import axiosClient from "../config/axiosClient";
 import { useNavigate } from "react-router-dom";
-
-
+import { useToast } from "@chakra-ui/react";
 
 const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const toast = useToast();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -34,15 +34,48 @@ const ProductsProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await axiosClient.post("/products/add", newProduct, config);
-      console.log(data)
+      const { data } = await axiosClient.post(
+        "/products/add",
+        newProduct,
+        config
+      );
+      console.log(data);
       setProducts([...products, data]);
-      
 
+     
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-      setTimeout(() => {
-        navigate("/admin/products");
-      }, 4000);
+  const deleteProduct = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      axiosClient.delete(`/products/${product.code}`, config);
+
+      const updatedProducts = products.filter(
+        (productState) => productState.code !== product.code
+      );
+
+      setProducts(updatedProducts);
+
+      setProduct({});
+
+      toast({
+        title: "Product Deleted Successfully",
+        description: "The product was deleted successfully",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +85,9 @@ const ProductsProvider = ({ children }) => {
     <ProductsContext.Provider
       value={{
         products,
-        addProduct
+        addProduct,
+        setProduct,
+        deleteProduct,
       }}
     >
       {children}

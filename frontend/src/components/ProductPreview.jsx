@@ -1,10 +1,20 @@
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
 import { MdUpdate, MdDelete } from "react-icons/md";
+import { useDisclosure } from "@chakra-ui/react";
+import DeleteProductModal from "./DeleteProductModal";
+import useProducts from "../hooks/useProducts";
 
 const ProductPreview = ({ product }) => {
-
-  const { name, price, description } = product;
   
+  const { setProduct } = useProducts();
+  const { name, price, description } = product;
+  const { onOpen, onClose, isOpen } = useDisclosure();
+
+  const handleDelete = () => {
+    setProduct(product);  
+    onOpen();
+    
+  }
 
   return (
     <Box>
@@ -32,10 +42,12 @@ const ProductPreview = ({ product }) => {
           leftIcon={<MdDelete />}
           color={"white"}
           iconSpacing={"1"}
+          onClick={handleDelete}
         >
           Delete
         </Button>
       </div>
+      <DeleteProductModal isOpen={isOpen} onClose={onClose}/>
     </Box>
   );
 };
