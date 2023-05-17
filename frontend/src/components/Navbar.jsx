@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
     Menu,
     MenuButton,
@@ -21,6 +22,9 @@ import {
   import { BiSushi } from "react-icons/bi";
 
 const Navbar = () => {
+
+  const navigate = useNavigate();
+  
   return (
     <nav className="w-full h-20 flex pl-2  items-center justify-between pt-2">
       <Menu>
@@ -95,7 +99,7 @@ const Navbar = () => {
         <h1 className="font-bold">ROAPP </h1>
       </div>
 
-      <button className=" bg-amber-400 rounded-md p-2 mr-8">
+      <button className=" bg-amber-400 rounded-md p-2 mr-8" onClick={() => navigate("/cart")}>
         <FaShoppingCart size={24} />
       </button>
     </nav>

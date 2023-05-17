@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Modal,
   ModalBody,
@@ -12,92 +12,98 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-import {MdAddCircle } from "react-icons/md";
+import { MdUpdate } from "react-icons/md";
 import { useDisclosure } from "@chakra-ui/react";
 import useProducts from "../hooks/useProducts";
 
-
-const AddProductModal = ({ modalButtonText, product }) => {
-  const { addProduct } = useProducts();
-
-  const [name, setName] = useState("");
-  const [code, setCode] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if ([code, name, description, price, image].includes("")) return;
-    await addProduct({ code, name, description, price, image });
-
-    setCode("");
-    setName("");
-    setDescription("");
-    setPrice("");
-    setImage("");
-  };
+const EditProductModal = ({ product }) => {
+  const { modifyProduct } = useProducts();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const { code, name, description, price, image } = product;
 
+  const [newCode, setNewCode] = useState();
+  const [newName, setNewName] = useState();
+  const [newDescription, setNewDescription] = useState();
+  const [newPrice, setNewPrice] = useState();
+  const [newImage, setNewImage] = useState();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await modifyProduct({
+      code: newCode,
+      name: newName,
+      description: newDescription,
+      price: newPrice,
+      image: newImage,
+    });
+  };
+
+  useEffect(() => {
+    setNewCode(code);
+    setNewName(name);
+    setNewDescription(description);
+    setNewPrice(price);
+    setNewImage(image);
+  }, [isOpen]);
 
   return (
     <>
       <Button
-        className="mt-2"
-        onClick={onOpen}
+        className="mr-2"
+        bg={"#6B46C1"}
+        leftIcon={<MdUpdate />}
         color={"white"}
-        bg={"#276749"}
         iconSpacing={"1"}
-        leftIcon={<MdAddCircle size={18} />}
+        onClick={onOpen}
       >
-        Add New Product
+        Update
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add a New Product</ModalHeader>
+          <ModalHeader>Modify the Product</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl>
               <FormLabel>Code</FormLabel>
               <Input
                 placeholder="Code"
-                onChange={(e) => setCode(e.target.value)}
-                value={code}
+                onChange={(e) => setNewCode(e.target.value)}
+                value={newCode}
               />
             </FormControl>
             <FormControl>
               <FormLabel>Name</FormLabel>
               <Input
                 placeholder="Product Name"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
+                onChange={(e) => setNewName(e.target.value)}
+                value={newName}
               />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Description</FormLabel>
               <Input
                 placeholder="Product Description"
-                onChange={(e) => setDescription(e.target.value)}
-                value={description}
+                onChange={(e) => setNewDescription(e.target.value)}
+                value={newDescription}
               />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Price</FormLabel>
               <Input
                 placeholder="Product Price"
-                onChange={(e) => setPrice(e.target.value)}
-                value={price}
+                onChange={(e) => setNewPrice(e.target.value)}
+                value={newPrice}
               />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Image</FormLabel>
               <Input
                 placeholder="Product Image (url)"
-                onChange={(e) => setImage(e.target.value)}
-                value={image}
+                onChange={(e) => setNewImage(e.target.value)}
+                value={newImage}
               />
             </FormControl>
           </ModalBody>
@@ -116,4 +122,4 @@ const AddProductModal = ({ modalButtonText, product }) => {
   );
 };
 
-export default AddProductModal;
+export default EditProductModal;

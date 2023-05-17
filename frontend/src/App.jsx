@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Admin from "./pages/Admin.jsx";
+import Cart from "./pages/Cart.jsx";
 import ProtectedRoute from "./layouts/ProtectedRoute.jsx";
 import Products from "./pages/Products.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -14,6 +15,8 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+
             <Route path="/admin" element={<ProtectedRoute />}>
               <Route index element={<Admin />} />
               <Route path="products" element={<Products />} />
