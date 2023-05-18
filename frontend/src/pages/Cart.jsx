@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import {
   Container,
@@ -9,19 +9,15 @@ import {
   Stack,
   Heading,
   StackDivider,
-  Box,
   Button,
-  NumberInput,
-  NumberInputField,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInputStepper,
+  Input,
 } from "@chakra-ui/react";
 import ProductCart from "../components/ProductCart";
 import useProducts from "../hooks/useProducts";
 
 const Cart = () => {
-  const { cart } = useProducts();
+  
+  const { cart, total } = useProducts();
 
   return (
     <div>
@@ -50,11 +46,13 @@ const Cart = () => {
             Resume
           </Heading>
 
-          <Text>Total Price: $31 </Text>
+          <Text>Total Price: ${total} </Text>
           <Text>Discount: $0 </Text>
           <Text fontStyle={"italic"} marginTop={"2"} fontWeight={"bold"}>
-            Total: $31
+            Total: ${total}
           </Text>
+
+          <Input placeholder="Additional Instructions" marginTop={2} />
 
           <Button marginTop={"2"} colorScheme="red">
             Proceed to checkout

@@ -4,8 +4,10 @@ import Admin from "./pages/Admin.jsx";
 import Cart from "./pages/Cart.jsx";
 import ProtectedRoute from "./layouts/ProtectedRoute.jsx";
 import Products from "./pages/Products.jsx";
+
 import { ChakraProvider } from "@chakra-ui/react";
 import { ProductsProvider } from "./context/ProductsProvider.jsx";
+import Register from "./pages/Register.jsx";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+
             <Route path="/cart" element={<Cart />} />
 
             <Route path="/admin" element={<ProtectedRoute />}>

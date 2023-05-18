@@ -2,7 +2,6 @@ import { useState, useEffect, createContext } from "react";
 import axiosClient from "../config/axiosClient";
 import { useToast } from "@chakra-ui/react";
 
-
 const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
@@ -11,6 +10,7 @@ const ProductsProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState({});
+  const [total, setTotal] = useState(0);
   const [isUpdatingProduct, setIsUpdatingProduct] = useState(false);
 
   useEffect(() => {
@@ -25,29 +25,71 @@ const ProductsProvider = ({ children }) => {
     getProducts();
   }, []);
 
-  
+
+  useEffect(() => {
+    calculateTotal();
+  }, [cart]);
+
+
+  const addOrder = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      await axiosClient.post("/orders/add", order, config);
+      toast({
+        title: "Order created",
+        status: "success",  
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) { 
+      console.error(error);
+    }
+  }
+
   const addProductToCart = (product) => {
-    const productExists = cart.find( (productState) => productState.code === product.code);
+    const productExists = cart.find(
+      (productState) => productState.code === product.code
+    );
     if (productExists) {
       productExists.quantity += 1;
-      const cartUpdated = cart.map( (productState) => productState.code === product.code ? productExists : productState);
+      const cartUpdated = cart.map((productState) =>
+        productState.code === product.code ? productExists : productState
+      );
       setCart(cartUpdated);
-    }else{
-      const productToAdd = {...product};
+    } else {
+      const productToAdd = { ...product };
       productToAdd.quantity = 1;
       setCart([...cart, productToAdd]);
-
     }
-  }
+  };
+
+  const calculateTotal = () => {
+    const total = cart.reduce((acc, product) => {
+      return acc + product.price * product.quantity;
+    }, 0);
+    setTotal(total);
+  };
 
   const editQuantity = (product, newQuantity) => {
-    const productExists = cart.find( (productState) => productState.code === product.code);
+    const productExists = cart.find(
+      (productState) => productState.code === product.code
+    );
     if (productExists) {
       productExists.quantity = newQuantity;
-      const cartUpdated = cart.map( (productState) => productState.code === product.code ? productExists : productState);
+      const cartUpdated = cart.map((productState) =>
+        productState.code === product.code ? productExists : productState
+      );
       setCart(cartUpdated);
     }
-  }
+  };
 
   const addProduct = async (newProduct) => {
     try {
@@ -166,7 +208,9 @@ const ProductsProvider = ({ children }) => {
         addProductToCart,
         cart,
         setCart,
-        editQuantity
+        editQuantity,
+        total,
+        addOrder
       }}
     >
       {children}
