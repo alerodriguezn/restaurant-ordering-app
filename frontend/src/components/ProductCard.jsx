@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
 
   const { name, description, price, image } = product;
 
-  console.log(product);
+
 
   return (
     <Card maxW="sm">

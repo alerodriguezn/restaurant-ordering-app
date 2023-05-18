@@ -17,8 +17,12 @@ import {
   NumberIncrementStepper,
   NumberInputStepper,
 } from "@chakra-ui/react";
+import ProductCart from "../components/ProductCart";
+import useProducts from "../hooks/useProducts";
 
 const Cart = () => {
+  const { cart } = useProducts();
+
   return (
     <div>
       <Navbar />
@@ -32,48 +36,11 @@ const Cart = () => {
 
             <CardBody>
               <Stack divider={<StackDivider />} spacing="4">
-                <Box>
-                  <Heading size="xs" textTransform="uppercase">
-                    Summary
-                  </Heading>
-                  <Text pt="2" fontSize="sm">
-                    View a summary of all your clients over the last month.
-                  </Text>
-                  <Text pt="2" fontWeight={"bold"} fontStyle={"italic"}>
-                    $16
-                  </Text>
-                  <div className="flex items-center gap-2 mt-2">
-                    <NumberInput size="sm" maxW={20} defaultValue={1} min={1}>
-                      <NumberInputField />
-                      <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                      </NumberInputStepper>
-                    </NumberInput>
-                    <Button size={"sm"}>Remove</Button>
-                  </div>
-                </Box>
-                <Box>
-                  <Heading size="xs" textTransform="uppercase">
-                    Summary
-                  </Heading>
-                  <Text pt="2" fontSize="sm">
-                    View a summary of all your clients over the last month.
-                  </Text>
-                  <Text pt="2" fontWeight={"bold"} fontStyle={"italic"}>
-                    $16
-                  </Text>
-                  <div className="flex items-center gap-2 mt-2">
-                    <NumberInput size="sm" maxW={20} defaultValue={1} min={1}>
-                      <NumberInputField />
-                      <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                      </NumberInputStepper>
-                    </NumberInput>
-                    <Button size={"sm"}>Remove</Button>
-                  </div>
-                </Box>
+                {cart.length ? (
+                  cart.map((product) => <ProductCart key={product._id} product={product} />)
+                ) : (
+                  <p>No products on the cart</p>
+                )}
               </Stack>
             </CardBody>
           </Card>

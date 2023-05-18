@@ -25,7 +25,7 @@ const ProductsProvider = ({ children }) => {
     getProducts();
   }, []);
 
-
+  
   const addProductToCart = (product) => {
     setCart([...cart, product]);
 
@@ -145,7 +145,9 @@ const ProductsProvider = ({ children }) => {
         isUpdatingProduct,
         setIsUpdatingProduct,
         modifyProduct,
-        addProductToCart
+        addProductToCart,
+        cart,
+        setCart
       }}
     >
       {children}
