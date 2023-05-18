@@ -27,8 +27,26 @@ const ProductsProvider = ({ children }) => {
 
   
   const addProductToCart = (product) => {
-    setCart([...cart, product]);
+    const productExists = cart.find( (productState) => productState.code === product.code);
+    if (productExists) {
+      productExists.quantity += 1;
+      const cartUpdated = cart.map( (productState) => productState.code === product.code ? productExists : productState);
+      setCart(cartUpdated);
+    }else{
+      const productToAdd = {...product};
+      productToAdd.quantity = 1;
+      setCart([...cart, productToAdd]);
 
+    }
+  }
+
+  const editQuantity = (product, newQuantity) => {
+    const productExists = cart.find( (productState) => productState.code === product.code);
+    if (productExists) {
+      productExists.quantity = newQuantity;
+      const cartUpdated = cart.map( (productState) => productState.code === product.code ? productExists : productState);
+      setCart(cartUpdated);
+    }
   }
 
   const addProduct = async (newProduct) => {
@@ -147,7 +165,8 @@ const ProductsProvider = ({ children }) => {
         modifyProduct,
         addProductToCart,
         cart,
-        setCart
+        setCart,
+        editQuantity
       }}
     >
       {children}
