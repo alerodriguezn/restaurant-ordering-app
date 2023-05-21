@@ -77,6 +77,7 @@ const login = async (req, res) => {
             _id: user._id,
             nombre: user.name,
             email: user.email,
+            isAdmin: user.isAdmin,
             token: generateJWT(user._id)
         })
     } else {
@@ -144,11 +145,18 @@ const newPassword = async (req, res) => {
 
 }
 
+const profile = async (req, res) => {
+    const { user } = req
+    res.json(user)
+
+}
+
 export {
     register,
     confirm,
     login,
     forgotPassword,
     checkToken,
-    newPassword
+    newPassword,
+    profile
 }

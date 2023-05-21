@@ -31,6 +31,11 @@ const ProductsProvider = ({ children }) => {
   }, [cart]);
 
 
+
+  const login = async (user) => {
+
+  }
+
   const addOrder = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -210,7 +215,8 @@ const ProductsProvider = ({ children }) => {
         setCart,
         editQuantity,
         total,
-        addOrder
+        addOrder,
+        login
       }}
     >
       {children}

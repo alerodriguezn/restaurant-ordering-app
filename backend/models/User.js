@@ -17,12 +17,15 @@ const userSchema = mongoose.Schema({
         required:true,
         trim:true,
         unique:true
-    
     },
     token:{
         type: String,
     },
     confirmed:{
+        type: Boolean,
+        default:false
+    },
+    isAdmin:{
         type: Boolean,
         default:false
     }
