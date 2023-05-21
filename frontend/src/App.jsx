@@ -9,6 +9,7 @@ import { ProductsProvider } from "./context/ProductsProvider.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx"
+import Profile from "./pages/Profile.jsx";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <Route path="register" element={<Register />} />
                 <Route path="login" element={<Login />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/profile" element={<Profile/>}/>
 
               
 

@@ -1,30 +1,30 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    Button,
-    MenuDivider,
-    MenuGroup,
-  } from "@chakra-ui/react";
-  
-  import { TiThMenu } from "react-icons/ti";
-  import {
-    FaShoppingCart,
-    FaHamburger,
-    FaPizzaSlice,
-    FaCoffee,
-    FaUserAlt,
-  } from "react-icons/fa";
-  import { IoFastFood } from "react-icons/io5";
-  import { GiTacos } from "react-icons/gi";
-  import { BiSushi } from "react-icons/bi";
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Button,
+  MenuDivider,
+  MenuGroup,
+} from "@chakra-ui/react";
+
+import {
+  FaShoppingCart,
+  FaHamburger,
+  FaPizzaSlice,
+  FaCoffee,
+  FaUserAlt,
+} from "react-icons/fa";
+import { IoFastFood } from "react-icons/io5";
+import { GiTacos } from "react-icons/gi";
+import { BiSushi } from "react-icons/bi";
+import { TiThMenu } from "react-icons/ti";
 
 const Navbar = () => {
 
   const navigate = useNavigate();
-  
+
   return (
     <nav className="w-full h-20 flex pl-2  items-center justify-between pt-2">
       <Menu>
@@ -83,13 +83,16 @@ const Navbar = () => {
           </MenuGroup>
           <MenuDivider borderColor={"#171923"} />
           <MenuGroup title="Profile" color={"#171923"} fontWeight={"bold"}>
-            <MenuItem
-              icon={<FaUserAlt size={16} />}
-              _focus={{ bg: "#FFF" }}
-              bg={"#FBBF24"}
-            >
-              My Account
-            </MenuItem>
+            <Link to={"/profile"}>
+              <MenuItem
+                icon={<FaUserAlt size={16} />}
+                _focus={{ bg: "#FFF" }}
+                bg={"#FBBF24"}
+              >
+                My Account
+              </MenuItem>
+            </Link>
+
           </MenuGroup>
         </MenuList>
       </Menu>
