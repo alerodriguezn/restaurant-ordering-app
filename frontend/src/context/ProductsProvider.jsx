@@ -29,7 +29,14 @@ const ProductsProvider = ({ children }) => {
       }
     };
     getProducts();
+
+    const cart = JSON.parse(localStorage.getItem("cart"));
+
+    setCart(cart ? cart : []);
+
   }, []);
+
+
 
 
   useEffect(() => {
@@ -83,7 +90,7 @@ const ProductsProvider = ({ children }) => {
         client : auth._id,
       }
 
-      console.log(order)
+    
 
       await axiosClient.post("/orders/add", order, config);
       toast({
@@ -93,6 +100,8 @@ const ProductsProvider = ({ children }) => {
         duration: 5000,
         isClosable: true,
       });
+
+      localStorage.removeItem("cart");
 
       setCart([]);
       setTotal(0);
@@ -119,6 +128,7 @@ const ProductsProvider = ({ children }) => {
       const productToAdd = { ...product };
       productToAdd.quantity = 1;
       setCart([...cart, productToAdd]);
+      localStorage.setItem("cart", JSON.stringify([...cart, productToAdd]));
     }
   };
 
@@ -139,6 +149,7 @@ const ProductsProvider = ({ children }) => {
         productState.code === product.code ? productExists : productState
       );
       setCart(cartUpdated);
+      localStorage.setItem("cart", JSON.stringify(cartUpdated));
     }
   };
 
