@@ -31,8 +31,29 @@ const deleteOrder = async (req, res) => {
 
 }
 
+const getOrdersById = async (req, res) => {
+
+    const { id } = req.params;
+
+    console.log(id)
+
+    try {
+        const orders = await Order.find({client: id})
+
+        console.log(orders)
+        res.json(orders);
+   
+        
+    } catch (error) {
+        res.status(500).json({ message: "Not Found" });
+    }
+
+
+}
+
 export {
     addOrder,
-    deleteOrder
+    deleteOrder,
+    getOrdersById
 
 }

@@ -10,6 +10,7 @@ import { AuthProvider } from "./context/AuthProvider.jsx";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx"
 import Profile from "./pages/Profile.jsx";
+import Orders from "./pages/Orders.jsx";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                 <Route path="login" element={<Login />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/profile" element={<Profile/>}/>
+                <Route path="/orders" element={<Orders/>}/>
 
               
 
