@@ -1,16 +1,19 @@
 import { Outlet, Navigate } from "react-router-dom"
-import AdminNavbar from "../components/AdminNavbar"
+import Navbar from "../components/Navbar"
+import { useToast } from "@chakra-ui/react"
+
 import useAuth from "../hooks/useAuth"
 
-const ProtectedRoute = () => {
+const UserRoute = () => {
 
+  const toast = useToast()
   const { auth, isLoading } = useAuth()
   if (isLoading) return "Cargando"
 
   return (
-    auth.isAdmin ? (
+    auth._id ? (
       <>
-        <AdminNavbar />
+        <Navbar />
 
         <main>
           <Outlet />
@@ -18,9 +21,10 @@ const ProtectedRoute = () => {
       </>
 
 
-    ) : (<Navigate to="/" />)
+    ) : ( <Navigate to="/login" />
+    )
 
   )
 }
 
-export default ProtectedRoute
+export default UserRoute

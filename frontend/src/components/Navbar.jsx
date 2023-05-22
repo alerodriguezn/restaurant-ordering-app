@@ -77,9 +77,11 @@ const Navbar = () => {
           </MenuGroup>
           <MenuDivider borderColor={"#171923"} />
           <MenuGroup title="Orders" color={"#171923"} fontWeight={"bold"}>
+          <Link to={"/orders"}>
             <MenuItem _focus={{ bg: "#FFF" }} bg={"#FBBF24"}>
               My Orders
             </MenuItem>
+            </Link>
           </MenuGroup>
           <MenuDivider borderColor={"#171923"} />
           <MenuGroup title="Profile" color={"#171923"} fontWeight={"bold"}>

@@ -42,7 +42,6 @@ const Orders = () => {
 
   return (
     <>
-      <Navbar />
 
       <Container maxW={"xl"}>
         <Card>

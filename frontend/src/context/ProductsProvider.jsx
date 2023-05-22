@@ -44,7 +44,19 @@ const ProductsProvider = ({ children }) => {
 
 
   const addOrder = async (description) => {
-    console.log("Hemo entrado")
+
+    if (cart.length === 0) {
+      toast({
+        title: "The cart is empty",
+        description: "You must add products to the cart to create an order",
+        status: "warning",  
+        duration: 5000,
+        isClosable: true,
+      });
+      
+      return
+    }
+
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -249,7 +261,6 @@ const ProductsProvider = ({ children }) => {
         setCart,
         editQuantity,
         total,
-        addOrder,
         login,
         addOrder
       }}

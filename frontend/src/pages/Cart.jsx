@@ -22,8 +22,6 @@ const Cart = () => {
 
   return (
     <div>
-      <Navbar />
-
       <Container className="flex" maxW={"container.md"}>
         <Container maxW={"container.md"}>
           <Card>

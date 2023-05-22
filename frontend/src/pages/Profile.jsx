@@ -10,7 +10,6 @@ const Profile = () => {
 
     return (
         <>
-            <Navbar />
             <Container maxW={"xl"}>
                 <Card>
                     <CardHeader>

@@ -8,10 +8,10 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { ProductsProvider } from "./context/ProductsProvider.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import Register from "./pages/Register.jsx";
-import Login from "./pages/Login.jsx"
+import Login from "./pages/Login.jsx";
 import Profile from "./pages/Profile.jsx";
 import Orders from "./pages/Orders.jsx";
-
+import UserRoute from "./layouts/UserRoute.jsx";
 
 function App() {
   return (
@@ -19,27 +19,22 @@ function App() {
       <AuthProvider>
         <ChakraProvider>
           <ProductsProvider>
-
-
-
             <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="register" element={<Register />} />
+              <Route path="login" element={<Login />} />
 
-       
-                <Route path="/" element={<Home />} />
-                <Route path="register" element={<Register />} />
-                <Route path="login" element={<Login />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/profile" element={<Profile/>}/>
-                <Route path="/orders" element={<Orders/>}/>
-
-              
+              <Route path="/" element={<UserRoute/>}>
+                <Route path="cart" element={<Cart />} />
+                <Route path="profile" element={<Profile />} />
+                <Route path="orders" element={<Orders />} />
+              </Route>
 
               <Route path="/admin" element={<ProtectedRoute />}>
                 <Route index element={<Admin />} />
                 <Route path="products" element={<Products />} />
               </Route>
             </Routes>
-
           </ProductsProvider>
         </ChakraProvider>
       </AuthProvider>
