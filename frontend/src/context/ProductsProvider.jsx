@@ -1,6 +1,8 @@
 import { useState, useEffect, createContext } from "react";
 import axiosClient from "../config/axiosClient";
 import { useToast } from "@chakra-ui/react";
+import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const ProductsContext = createContext();
 
@@ -12,6 +14,10 @@ const ProductsProvider = ({ children }) => {
   const [product, setProduct] = useState({});
   const [total, setTotal] = useState(0);
   const [isUpdatingProduct, setIsUpdatingProduct] = useState(false);
+
+  const navigate = useNavigate();
+
+  const { auth } = useAuth();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -31,12 +37,14 @@ const ProductsProvider = ({ children }) => {
   }, [cart]);
 
 
-
-  const login = async (user) => {
-
+  const login = async () => {
   }
 
-  const addOrder = async () => {
+
+
+
+  const addOrder = async (description) => {
+    console.log("Hemo entrado")
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -47,13 +55,39 @@ const ProductsProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
+
+
+
+      const products = cart.map((productCart) => ({
+        productID: productCart._id,
+        quantity: productCart.quantity,
+      }));
+
+
+      const order = {
+        products : products,
+        description: description,
+        total: total, 
+        client : auth._id,
+      }
+
+      console.log(order)
+
       await axiosClient.post("/orders/add", order, config);
       toast({
         title: "Order created",
+        description: "Your order has been created successfully",
         status: "success",  
         duration: 5000,
         isClosable: true,
       });
+
+      setCart([]);
+      setTotal(0);
+
+      navigate("/")
+
+
     } catch (error) { 
       console.error(error);
     }
@@ -216,7 +250,8 @@ const ProductsProvider = ({ children }) => {
         editQuantity,
         total,
         addOrder,
-        login
+        login,
+        addOrder
       }}
     >
       {children}

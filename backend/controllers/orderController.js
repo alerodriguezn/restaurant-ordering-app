@@ -2,7 +2,7 @@ import Order from "../models/Order.js";
 import generateId from "../helpers/generateId.js";
 
 const addOrder = async (req, res) => {
-    const { products, description, client } = req.body;
+    const { products, description, client,total } = req.body;
     const orderID = generateId();
     try {
         const order = new Order({
@@ -10,6 +10,7 @@ const addOrder = async (req, res) => {
             products,
             description,
             client,
+            total
         });
         await order.save();
         res.status(201).json(order);

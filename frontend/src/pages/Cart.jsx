@@ -17,7 +17,8 @@ import useProducts from "../hooks/useProducts";
 
 const Cart = () => {
   
-  const { cart, total } = useProducts();
+  const [ description , setDescription ] = useState("")
+  const { cart, total, addOrder } = useProducts();
 
   return (
     <div>
@@ -52,10 +53,10 @@ const Cart = () => {
             Total: ${total}
           </Text>
 
-          <Input placeholder="Additional Instructions" marginTop={2} />
+          <Input placeholder="Additional Instructions" marginTop={2} value={description} onChange={(e) => setDescription(e.target.value)} />
 
-          <Button marginTop={"2"} colorScheme="red">
-            Proceed to checkout
+          <Button marginTop={"2"} colorScheme="red" onClick={() => addOrder(description)}>
+            Create the order
           </Button>
         </Container>
       </Container>
