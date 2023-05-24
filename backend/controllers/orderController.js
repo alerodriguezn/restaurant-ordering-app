@@ -51,9 +51,26 @@ const getOrdersById = async (req, res) => {
 
 }
 
+const getAllOrders = async (req, res) => {
+
+    try {
+        const orders = await Order.find({})
+
+        console.log(orders)
+        res.json(orders);
+   
+        
+    } catch (error) {
+        res.status(500).json({ message: "Not Found" });
+    }
+
+
+}
+
 export {
     addOrder,
     deleteOrder,
-    getOrdersById
+    getOrdersById,
+    getAllOrders
 
 }

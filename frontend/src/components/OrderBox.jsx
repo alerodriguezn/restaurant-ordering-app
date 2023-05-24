@@ -1,7 +1,10 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 
-const OrderBox = ({order}) => {
-  const { orderID, products, description, total } = order
+const OrderBox = ({ order }) => {
+  const { orderID, description, total } = order
+  console.log(order)
+
+
   return (
     <Box>
       <Heading size="xs" textTransform="uppercase">
