@@ -99,11 +99,12 @@ const Navbar = () => {
         </MenuList>
       </Menu>
 
+      <Link to={"/"}>
       <div className="flex justify-center items-center gap-2 bg-amber-400 rounded-md px-4 py-2">
         <IoFastFood size={24} />
         <h1 className="font-bold">ROAPP </h1>
       </div>
-
+      </Link>
       <button className=" bg-amber-400 rounded-md p-2 mr-8" onClick={() => navigate("/cart")}>
         <FaShoppingCart size={24} />
       </button>
